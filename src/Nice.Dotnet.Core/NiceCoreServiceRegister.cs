@@ -18,6 +18,9 @@ namespace Nice.Dotnet.Core
 
             services.AddSingleton(spa=> httpClient);
             services.AddSingleton<ICustomInfoClientService,CustomInfoClientService>();
+
+            var chatClient = new ChatConnectService(baseUrl);
+            services.AddSingleton(spa=> chatClient);
             return services;
         }
     }

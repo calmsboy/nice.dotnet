@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Nice.Dotnet.Core.IServices;
 using Nice.Dotnet.Core.Models;
+using Nice.Dotnet.Core.Services;
 using Nice.Dotnet.Domain.Entities;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,11 +15,10 @@ namespace Nice.Dotnet.Core.ViewModels
 
         public BaseViewModel(ICustomInfoClientService customInfoService)
         {
-            customInfos = new() { 
-                new CustomInfoModel{  Id ="1" , Name = "H1",City="hand1"}
-            };
+            customInfos = new();
+            messageCollect = new();
             _customInfoService = customInfoService;
-
+            
         }
 
         List<CustomInfoModel> CreateSeedDate(int count)
@@ -44,6 +44,10 @@ namespace Nice.Dotnet.Core.ViewModels
         /// </summary>
         [ObservableProperty]
         ObservableCollection<CustomInfoModel> customInfos;
+        
+        [ObservableProperty]
+
+        ObservableCollection<string> messageCollect;
         /// <summary>
         /// 信息
         /// </summary>

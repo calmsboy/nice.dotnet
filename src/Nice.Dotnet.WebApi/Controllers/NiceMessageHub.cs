@@ -18,10 +18,12 @@ namespace Nice.Dotnet.WebApi.Controllers
             //根据id获取指定客户端
             var client = Clients.Client(cid);
             //向所有用户发送消息
-            //Clients.All.SendAsync("ReceivePublicMessageLogin", $"{cid}加入了聊天室");
+            Clients.All.SendAsync("ReceiveMessageLogin", $"{cid}加入了聊天室");
             OnlineUserCount += 1;
             return base.OnConnectedAsync();
         }
+
+
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             Log.Information($"ID:{Context.ConnectionId} 已断开");
@@ -29,7 +31,7 @@ namespace Nice.Dotnet.WebApi.Controllers
             //根据id获取指定客户端
             var client = Clients.Client(cid);
             //像所有用户发送消息
-            //Clients.All.SendAsync("ReceivePublicMessageLogin", $"{cid}离开了聊天室");        //界面显示登录
+            //Clients.All.SendAsync("ReceiveMessageLogin", $"{cid}离开了聊天室");        //界面显示登录
             if (OnlineUserCount>0)
             {
                 OnlineUserCount -= 1;
@@ -43,16 +45,17 @@ namespace Nice.Dotnet.WebApi.Controllers
         /// <param name="user"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task SendPublicMessage(string user, string message)
-        {                                                    
-            await Clients.All.SendAsync("ReceivePublicMessage", user, message); 
+        public async Task SendMessage(string user, string message)
+        {   
+            Log.Information($"{user}:Sending message: {message}");
+            await Clients.All.SendAsync("ReceiveMessage", user, message); 
         }
 
         /// <summary>
         /// 用户登录
         /// </summary>
         /// <param name="userId"></param>
-        public void Login(string userId)     //对应前端的invoke
+        public void Login(string userId)
         {
             if (!dicUsers.ContainsKey(userId))
             {

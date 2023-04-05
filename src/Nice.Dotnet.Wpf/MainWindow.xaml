@@ -13,6 +13,8 @@
         <Button Content="Get" Command="{Binding LoadDataCommand}" HorizontalAlignment="Left" Height="40" Margin="145,46,0,0" VerticalAlignment="Top" Width="90"/>
         <Button Content="Post" Command="{Binding PostDataCommand}" HorizontalAlignment="Left" Height="40" Margin="275,46,0,0" VerticalAlignment="Top" Width="90" />
         <Button Content="Clear" Command="{Binding ClearDataCommand}" HorizontalAlignment="Left" Height="40" Margin="400,45,0,0" VerticalAlignment="Top" Width="55" />
+
+
         <ListView HorizontalAlignment="Left" Height="180" Margin="25,170,0,0" VerticalAlignment="Top" Width="460" 
                   d:ItemsSource="{d:SampleData ItemCount=5}"
                   ItemsSource="{Binding CustomInfos}">
@@ -38,7 +40,16 @@
 
             </ListView.View>
         </ListView>
-       
+        <TextBox HorizontalAlignment="Left" Height="70" Margin="545,45,0,0" TextWrapping="Wrap" Text="{Binding Message}" VerticalAlignment="Top" Width="125" 
+                 RenderTransformOrigin="0.48,0.568 "/>
+        <Button Content="发送消息" HorizontalAlignment="Left" Height="39" Margin="700,48,0,0"
+                VerticalAlignment="Top" Width="80" Command="{Binding SendMessageCommand}"/>
+        <ListBox HorizontalAlignment="Left" Height="140" Margin="545,200,0,0" VerticalAlignment="Top" Width="235"
+                 d:ItemsSource="{d:SampleData ItemCount=0}"
+                 ItemsSource="{Binding MessageCollect}"
+                 />
+
+
 
     </Grid>
 </Window>

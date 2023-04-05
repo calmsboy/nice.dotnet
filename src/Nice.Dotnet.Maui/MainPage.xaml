@@ -11,6 +11,7 @@
 
     <ScrollView>
         <Grid
+            Padding="10"
             >
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
@@ -87,8 +88,38 @@
                 </CollectionView.ItemTemplate>
 
             </CollectionView>
+
+            <Entry Grid.Row="4" Placeholder="请输入信息" Text="{Binding Message}" Grid.ColumnSpan="3" />
             
-            <Entry Placeholder="请输入信息" />
+            <Button
+                Grid.Column="4"
+                Grid.Row="4"
+                x:Name="SendMsgBtn"
+                Command="{Binding Source= {RelativeSource AncestorType={x:Type viewModel:MainViewModel}},Path=SendMessageCommand}"
+                Text="发送消息"
+                HeightRequest="40"
+                WidthRequest="90"
+                />
+
+            <CollectionView 
+                Grid.Row="5"
+                Grid.ColumnSpan="3"
+                
+                HorizontalOptions="Center"
+                VerticalOptions="Center" 
+                        ItemsSource="{Binding MessageCollect}"
+                        >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+                        <Grid 
+                            Padding="10,10,10,10"
+                              >
+                            <Label  Text="{Binding .}" HorizontalTextAlignment="Start"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
 
         </Grid>
     </ScrollView>

@@ -15,9 +15,5 @@ namespace Nice.Dotnet.Wpf
             this.DataContext = Ioc.Default.GetService<MainViewModel>();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -119,6 +119,11 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
+    
+    
+    
+    
+    
 
     <Style TargetType="Frame">
         <Setter Property="HasShadow" Value="False" />
