@@ -27,7 +27,7 @@ namespace Nice.Dotnet.Extension.LoggerSupport
                  //.MinimumLevel.Debug()
                  .MinimumLevel.Override("System", LogEventLevel.Warning)
                //.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)//.AspNetCore.Authentication
-               //.MinimumLevel.Information()
+               .MinimumLevel.Information()
                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                .Enrich.FromLogContext()
                // 配置日志输出到文件，文件输出到当前项目的 logs 目录下

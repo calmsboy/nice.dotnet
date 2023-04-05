@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Nice.Dotnet.Application.IServices;
-using Nice.Dotnet.Domain.IEntities;
+using Nice.Dotnet.Domain.Std.IEntities;
 using Serilog;
 using System.Linq.Expressions;
 
@@ -14,7 +14,7 @@ namespace Nice.Dotnet.Application.Services
     public class Service<TDbContext,TModel, TKey> : IService<TModel, TKey> where TModel : class,IEntity<TKey> 
         where TDbContext : DbContext
     {
-        private readonly TDbContext _dbContext;
+        public readonly TDbContext _dbContext;
         
         public Service(TDbContext dbContext)
         {

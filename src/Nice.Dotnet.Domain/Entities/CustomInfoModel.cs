@@ -1,5 +1,5 @@
 ﻿using Nice.Common.Tool.IdCreate;
-using Nice.Dotnet.Domain.IEntities;
+using Nice.Dotnet.Domain.Std.IEntities;
 using System.ComponentModel.DataAnnotations;
 
 namespace Nice.Dotnet.Domain.Entities
@@ -7,7 +7,7 @@ namespace Nice.Dotnet.Domain.Entities
     /// <summary>
     /// 用户实体类
     /// </summary>
-    public class CustomInfoModel : IEntity<string>
+    public class CustomInfoModel : ICustomInfoRoot
     {
         [Key]
         public string Id { get; set; } = IdCreater.GetBanksId();

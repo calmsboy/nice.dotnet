@@ -7,6 +7,6 @@ namespace Nice.Dotnet.Application.IServices
     /// </summary>
     public interface ICustomInfoService:IService<CustomInfoModel,string>
     {
-
+        ValueTask ClearData();
     }
 }

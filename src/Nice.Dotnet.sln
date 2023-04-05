@@ -5,13 +5,27 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nice.Dotnet.WebApi", "Nice.Dotnet.WebApi\Nice.Dotnet.WebApi.csproj", "{8D5B3453-C4AA-4AEF-A3A4-7848E2DFDBEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nice.Dotnet.Domain", "Nice.Dotnet.Domain\Nice.Dotnet.Domain.csproj", "{FED14080-4950-4C18-94B9-57B22140E7F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nice.Dotnet.Domain", "Nice.Dotnet.Domain\Nice.Dotnet.Domain.csproj", "{FED14080-4950-4C18-94B9-57B22140E7F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nice.Common.Tool", "Nice.Common.Tool\Nice.Common.Tool.csproj", "{BAE21620-19A4-4705-9CFE-26BED402428C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nice.Common.Tool", "Nice.Common.Tool\Nice.Common.Tool.csproj", "{BAE21620-19A4-4705-9CFE-26BED402428C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nice.Dotnet.Application", "Nice.Dotnet.Application\Nice.Dotnet.Application.csproj", "{B8CDD734-68CA-48B5-9597-B95A73B0B7FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nice.Dotnet.Application", "Nice.Dotnet.Application\Nice.Dotnet.Application.csproj", "{B8CDD734-68CA-48B5-9597-B95A73B0B7FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nice.Dotnet.Extension", "Nice.Dotnet.Extension\Nice.Dotnet.Extension.csproj", "{E0FEB7CA-9827-442C-9695-3CFF208B9D46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nice.Dotnet.Extension", "Nice.Dotnet.Extension\Nice.Dotnet.Extension.csproj", "{E0FEB7CA-9827-442C-9695-3CFF208B9D46}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nice.Dotnet.Wpf", "Nice.Dotnet.Wpf\Nice.Dotnet.Wpf.csproj", "{A0C9245E-B4C8-4E21-96FD-707D232680F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nice.Infrastructure", "Nice.Infrastructure", "{0E4778D5-1A39-491B-ABAE-32F09B31B8C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{45F53247-F329-4E16-8EC6-63CCCBEBF765}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{8F0F15AA-6E3F-481D-8672-B545C2728C22}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nice.Dotnet.Maui", "Nice.Dotnet.Maui\Nice.Dotnet.Maui.csproj", "{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nice.Dotnet.Core", "Nice.Dotnet.Core\Nice.Dotnet.Core.csproj", "{E0C79566-2214-4E3D-8D9D-3532BC55AA94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nice.Dotnet.Domain.Std", "Nice.Dotnet.Domain.Std\Nice.Dotnet.Domain.Std.csproj", "{3A2600F2-3D5F-424F-BE7D-BB23ACD398C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +53,38 @@ Global
 		{E0FEB7CA-9827-442C-9695-3CFF208B9D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0FEB7CA-9827-442C-9695-3CFF208B9D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0FEB7CA-9827-442C-9695-3CFF208B9D46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C9245E-B4C8-4E21-96FD-707D232680F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C9245E-B4C8-4E21-96FD-707D232680F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C9245E-B4C8-4E21-96FD-707D232680F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C9245E-B4C8-4E21-96FD-707D232680F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E0C79566-2214-4E3D-8D9D-3532BC55AA94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C79566-2214-4E3D-8D9D-3532BC55AA94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C79566-2214-4E3D-8D9D-3532BC55AA94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C79566-2214-4E3D-8D9D-3532BC55AA94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2600F2-3D5F-424F-BE7D-BB23ACD398C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2600F2-3D5F-424F-BE7D-BB23ACD398C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2600F2-3D5F-424F-BE7D-BB23ACD398C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2600F2-3D5F-424F-BE7D-BB23ACD398C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D5B3453-C4AA-4AEF-A3A4-7848E2DFDBEB} = {45F53247-F329-4E16-8EC6-63CCCBEBF765}
+		{FED14080-4950-4C18-94B9-57B22140E7F5} = {0E4778D5-1A39-491B-ABAE-32F09B31B8C1}
+		{BAE21620-19A4-4705-9CFE-26BED402428C} = {0E4778D5-1A39-491B-ABAE-32F09B31B8C1}
+		{B8CDD734-68CA-48B5-9597-B95A73B0B7FC} = {0E4778D5-1A39-491B-ABAE-32F09B31B8C1}
+		{E0FEB7CA-9827-442C-9695-3CFF208B9D46} = {0E4778D5-1A39-491B-ABAE-32F09B31B8C1}
+		{A0C9245E-B4C8-4E21-96FD-707D232680F8} = {8F0F15AA-6E3F-481D-8672-B545C2728C22}
+		{49DA19B8-3F49-4E8F-ACBE-4A14B1E45656} = {8F0F15AA-6E3F-481D-8672-B545C2728C22}
+		{E0C79566-2214-4E3D-8D9D-3532BC55AA94} = {8F0F15AA-6E3F-481D-8672-B545C2728C22}
+		{3A2600F2-3D5F-424F-BE7D-BB23ACD398C6} = {0E4778D5-1A39-491B-ABAE-32F09B31B8C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB73F0EF-8F38-481E-95C3-71CDC677CD2C}

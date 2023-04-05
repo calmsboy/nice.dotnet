@@ -1,4 +1,4 @@
-﻿using Nice.Dotnet.Domain.IEntities;
+﻿using Nice.Dotnet.Domain.Std.IEntities;
 using System.Linq.Expressions;
 
 namespace Nice.Dotnet.Application.IServices

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Nice.Dotnet.Application.IServices;
 using Nice.Dotnet.Domain.Entities;
+using Serilog;
 
 namespace Nice.Dotnet.WebApi.Controllers
 {
@@ -26,7 +28,19 @@ namespace Nice.Dotnet.WebApi.Controllers
         [HttpGet("list")]
         public async Task<IActionResult> GetEntities()
         {
+            Log.Information($"{HttpContext.Connection.RemoteIpAddress}:获取数据");
             return new ObjectResult(await _customInfoService.GetAllAsync());
+        }
+        /// <summary>
+        /// 清除数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<IActionResult> ClearData()
+        {
+            Log.Information($"{HttpContext.Connection.RemoteIpAddress}:清除了数据");
+            await _customInfoService.ClearData();
+            return new ObjectResult(true);
         }
         /// <summary>
         /// 
@@ -36,8 +50,9 @@ namespace Nice.Dotnet.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEntities([FromBody] List<CustomInfoModel> models)
         {
-            await _customInfoService.AddAsync(models);
-            return new ObjectResult(models);
+            Log.Information($"{HttpContext.Connection.RemoteIpAddress}:提交的数据：{JsonConvert.SerializeObject(models)}");
+            var result= await _customInfoService.AddAsync(models);
+            return new ObjectResult(result);
         }
 
     }

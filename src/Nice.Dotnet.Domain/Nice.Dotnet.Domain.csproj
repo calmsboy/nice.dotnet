@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Nice.Common.Tool\Nice.Common.Tool.csproj" />
+    <ProjectReference Include="..\Nice.Dotnet.Domain.Std\Nice.Dotnet.Domain.Std.csproj" />
   </ItemGroup>
 
 </Project>
