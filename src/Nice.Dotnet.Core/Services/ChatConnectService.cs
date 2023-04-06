@@ -24,7 +24,7 @@ namespace Nice.Dotnet.Core.Services
                     };
                 })
                 .Build();
-            _hubConnection.KeepAliveInterval = TimeSpan.FromSeconds(60);
+            _hubConnection.KeepAliveInterval = TimeSpan.FromSeconds(360);
             await Connect();
             Register();
 

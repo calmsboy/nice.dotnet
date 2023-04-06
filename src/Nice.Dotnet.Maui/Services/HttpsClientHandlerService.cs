@@ -4,6 +4,7 @@
     {
         public HttpMessageHandler GetPlatformMessageHandler()
         {
+
 #if ANDROID
             var handler = new CustomAndroidMessageHandler();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
@@ -20,7 +21,13 @@
             };
             return handler;
 #else
-            throw new PlatformNotSupportedException("Only Android and iOS supported.");
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (sender,cert,chain,sslPolicyErrors)=>{
+                return true;
+            };
+            return handler;
+
+            //throw new PlatformNotSupportedException("Only Android and iOS supported.");
 #endif
         }
 

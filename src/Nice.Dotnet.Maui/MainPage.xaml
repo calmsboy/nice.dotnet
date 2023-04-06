@@ -89,8 +89,10 @@
 
             </CollectionView>
 
-            <Entry Grid.Row="4" Placeholder="请输入信息" Text="{Binding Message}" Grid.ColumnSpan="3" />
-            
+            <Entry Grid.Row="4" Placeholder="请输入信息" Text="{Binding Message}" Grid.ColumnSpan="3" 
+                   Margin="10"
+                   />
+
             <Button
                 Grid.Column="4"
                 Grid.Row="4"

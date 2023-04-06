@@ -22,8 +22,12 @@ namespace Nice.Dotnet.Maui
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
 
             var hander = new HttpsClientHandlerService();
+            var api = "https://10.0.2.2:5188";
+#if WINDOWS
+            api = "https://localhost:5188";
+#endif
 
-            builder.Services.AddNiceClientService("https://10.0.2.2:5188", hander.GetPlatformMessageHandler());
+            builder.Services.AddNiceClientService(api, hander.GetPlatformMessageHandler());
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<MainViewModel>();
             return builder.Build();
