@@ -19,10 +19,7 @@ namespace Nice.Dotnet.Extension.LoggerSupport
         public static ILogger BuildSerilogInstance(string serverName, ConsoleTheme? theme = null, bool isHaveDebugSkipWriteFile = false)
         {
             #region LogSetup
-            if (theme is null)
-            {
-                theme = AnsiConsoleTheme.Literate;
-            }
+            theme ??= AnsiConsoleTheme.Literate;
             var loggerConfiguration = new LoggerConfiguration()
                  //.MinimumLevel.Debug()
                  .MinimumLevel.Override("System", LogEventLevel.Warning)
