@@ -2,7 +2,7 @@
 using Nice.Dotnet.Wpf.ViewModels;
 using System.Windows;
 
-namespace Nice.Dotnet.Wpf
+namespace Nice.Dotnet.Wpf.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -15,5 +15,10 @@ namespace Nice.Dotnet.Wpf
             this.DataContext = Ioc.Default.GetService<MainViewModel>();
         }
 
+        private void ChartSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            var chartsWindow = new ChartsWindow();
+            chartsWindow.Show();
+        }
     }
 }

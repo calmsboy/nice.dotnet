@@ -28,7 +28,6 @@ namespace Nice.Dotnet.WebApi
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddSignalR();
-
             builder.Services.AddDbContext<NiceDbContext>(opt =>
             {
                 opt.UseSqlite(@"Data Source=Nice.db");

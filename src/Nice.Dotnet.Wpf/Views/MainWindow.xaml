@@ -1,4 +1,4 @@
-﻿<Window x:Class="Nice.Dotnet.Wpf.MainWindow"
+﻿<Window x:Class="Nice.Dotnet.Wpf.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -48,6 +48,7 @@
                  d:ItemsSource="{d:SampleData ItemCount=0}"
                  ItemsSource="{Binding MessageCollect}"
                  />
+        <Button Content="图表页面" HorizontalAlignment="Left" Height="33" Margin="400,115,0,0" VerticalAlignment="Top" Width="55" Click="ChartSwitch_Click" />
 
 
 

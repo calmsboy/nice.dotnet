@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
 using Microsoft.Extensions.DependencyInjection;
 using Nice.Dotnet.Core;
 using Nice.Dotnet.Wpf.ViewModels;
@@ -27,8 +29,30 @@ namespace Nice.Dotnet.Wpf
                 var services = new ServiceCollection();
                 services.AddNiceClientService();
                 services.AddTransient<MainViewModel>();
+                services.AddTransient<ChartsViewModel>();
                 Ioc.Default.ConfigureServices(services.BuildServiceProvider());
+                _initialized = true;
             }
+        }
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            LiveCharts.Configure(config =>
+                config
+                    // registers SkiaSharp as the library backend
+                    // REQUIRED unless you build your own
+                    .AddSkiaSharp()
+
+                    // adds the default supported types
+                    // OPTIONAL but highly recommend
+                    .AddDefaultMappers()
+
+                    // select a theme, default is Light
+                    // OPTIONAL
+                    //.AddDarkTheme()
+                    .AddLightTheme()
+
+                );
         }
     }
 }
