@@ -10,7 +10,17 @@
         d:DataContext="{d:DesignInstance Type=vm:ChartsViewModel}"
         
         Title="ChartsWindow" Height="450" Width="800">
-    <lvc:CartesianChart ZoomMode="X"
-        Series="{Binding SeriesCollection}">
-    </lvc:CartesianChart>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="导出图表到图片"  Click="SaveBtn_Click"/>
+        </StackPanel>
+        <lvc:CartesianChart x:Name="LineChart" ZoomMode="X" Grid.Row="1"
+            Series="{Binding SeriesCollection}">
+        </lvc:CartesianChart>
+    </Grid>
+    
 </Window>

@@ -29,7 +29,7 @@ public partial class ChartsViewModel
 
         seriesCollection = new()
         {
-            new StepLineSeries<ObservablePoint>
+            new LineSeries<ObservablePoint>
             {
                 Values = _observablePoints
             }
