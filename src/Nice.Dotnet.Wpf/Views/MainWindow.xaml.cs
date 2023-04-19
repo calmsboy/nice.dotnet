@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Nice.Dotnet.Wpf.ViewModels;
 using System.Windows;
 
@@ -12,13 +13,13 @@ namespace Nice.Dotnet.Wpf.Views
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = Ioc.Default.GetService<MainViewModel>();
+            this.DataContext = App.ServiceProvideR.GetService<MainViewModel>();
         }
 
         private void ChartSwitch_Click(object sender, RoutedEventArgs e)
         {
-            var chartsWindow = new ChartsWindow();
-            chartsWindow.Show();
+            var chartsWindow = App.ServiceProvideR.GetService<ChartsWindow>();
+            chartsWindow?.Show();
         }
     }
 }

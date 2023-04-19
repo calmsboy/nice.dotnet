@@ -12,11 +12,11 @@ namespace Nice.Dotnet.Extension.LoggerSupport
         /// <summary>
         /// 构建Serilog实例
         /// </summary>
-        /// <param name="serverName"></param>
-        /// <param name="theme"></param>
-        /// <param name="isHaveDebugSkipWriteFile">是否在Debug模式跳过写入文件</param>
+        /// <param name="serverName">服务名称</param>
+        /// <param name="theme">输出到控制台主题</param>
+        /// <param name="isHaveDebugSkipWriteConsole">是否在Debug模式跳过写入控制台</param>
         /// <returns></returns>
-        public static ILogger BuildSerilogInstance(string serverName, ConsoleTheme? theme = null, bool isHaveDebugSkipWriteFile = false)
+        public static ILogger BuildSerilogInstance(string serverName, ConsoleTheme? theme = null, bool isHaveDebugSkipWriteConsole = false)
         {
             #region LogSetup
             theme ??= AnsiConsoleTheme.Literate;
@@ -32,7 +32,7 @@ namespace Nice.Dotnet.Extension.LoggerSupport
                .WriteTo.Async(f => f.File(Path.Combine("logs", @$"{serverName}.log")
                                 , rollingInterval: RollingInterval.Day));
 
-            if (!isHaveDebugSkipWriteFile)
+            if (!isHaveDebugSkipWriteConsole)
             {
                 loggerConfiguration.WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}" +
                    "{Message:lj}{NewLine}{Exception}{NewLine}", theme: theme);

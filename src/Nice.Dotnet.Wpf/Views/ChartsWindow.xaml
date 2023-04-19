@@ -7,6 +7,7 @@
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
         xmlns:vm="clr-namespace:Nice.Dotnet.Wpf.ViewModels"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         d:DataContext="{d:DesignInstance Type=vm:ChartsViewModel}"
         
         Title="ChartsWindow" Height="450" Width="800">
@@ -17,9 +18,13 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="导出图表到图片"  Click="SaveBtn_Click"/>
+            <Button Content="导入Excel数据" Margin="20,0,0,0" Width="121" Command="{Binding ReadExcelCommand}"/>
+
         </StackPanel>
         <lvc:CartesianChart x:Name="LineChart" ZoomMode="X" Grid.Row="1"
-            Series="{Binding SeriesCollection}">
+            Series="{Binding SeriesCollection}"
+                            XAxes="{Binding XAxes}"
+           >
         </lvc:CartesianChart>
     </Grid>
     

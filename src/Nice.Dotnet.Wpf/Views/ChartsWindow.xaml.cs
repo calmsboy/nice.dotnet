@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 using LiveChartsCore.SkiaSharpView.SKCharts;
 using LiveChartsCore.SkiaSharpView.WPF;
+using Microsoft.Extensions.DependencyInjection;
 using Nice.Dotnet.Wpf.ViewModels;
+using Serilog;
 using System.IO;
 using System.Windows;
 
@@ -15,7 +17,7 @@ namespace Nice.Dotnet.Wpf.Views
         public ChartsWindow()
         {
             InitializeComponent();
-            this.DataContext= Ioc.Default.GetService<ChartsViewModel>();
+            this.DataContext= App.ServiceProvideR.GetService<ChartsViewModel>();
         }
         private void SaveImageFromChart()
         {
@@ -26,6 +28,7 @@ namespace Nice.Dotnet.Wpf.Views
 
                 skLineChart.SaveImage("LineChart.png");
                 MessageBox.Show("已保存在相对目录下");
+                Log.Information("LineChart.png已保存在相对目录下");
             }
             catch (System.Exception)
             {
@@ -37,5 +40,12 @@ namespace Nice.Dotnet.Wpf.Views
         {
             SaveImageFromChart();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
+
     }
 }
