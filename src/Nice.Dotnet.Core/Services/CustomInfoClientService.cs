@@ -11,9 +11,9 @@ namespace Nice.Dotnet.Core.Services
 
         private readonly HttpClient _httpClient;
 
-        public CustomInfoClientService(HttpClient httpClient)
+        public CustomInfoClientService(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("DefaultHttpClient");
         }
 
         public async ValueTask<bool> ClearData()
