@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Nice.Dotnet.Extension\Nice.Dotnet.Extension.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Store\" />
+  </ItemGroup>
+
 </Project>

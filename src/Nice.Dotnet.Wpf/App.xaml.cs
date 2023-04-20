@@ -44,10 +44,41 @@ public partial class App : Application
             this.Exit += new ExitEventHandler(App_ExitEvent);
             #endregion
 
-
             _initialized =true;
         }
             
+    }
+    
+
+    protected override async void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+        LiveCharts.Configure(config =>
+            config
+                .AddSkiaSharp()
+                .AddDefaultMappers()
+                .AddLightTheme()
+            );
+       await UseHostBuilder(e.Args);
+    }
+    private async Task UseHostBuilder(string[] args)
+    {
+        var hostBuilder = CreateHostBuilder(args);
+        var host =await hostBuilder.StartAsync();
+        ServiceProvideR = host.Services;
+        host.Services.GetService<MainWindow>()?.ShowDialog();
+        Current.Shutdown();
+    }
+    /// <summary>
+    /// 使用Host作为运行
+    /// </summary>
+    public static IHostBuilder CreateHostBuilder(string[] args)
+    {
+        var hostBuilder = Host.CreateDefaultBuilder(args).UseSerilog();
+        hostBuilder.ConfigureServices((ctx, services) => {
+            services.AddService();
+        });
+        return hostBuilder;
     }
     #region 全局异常捕获处理
     private void App_StartUpEvent(object sender, StartupEventArgs e)
@@ -118,46 +149,10 @@ public partial class App : Application
         e.SetObserved();//设置该异常已察觉（这样处理后就不会引起程序崩溃）
     }
     #endregion
-
-    protected override async void OnStartup(StartupEventArgs e)
-    {
-        base.OnStartup(e);
-        LiveCharts.Configure(config =>
-            config
-                // registers SkiaSharp as the library backend
-                // REQUIRED unless you build your own
-                .AddSkiaSharp()
-                // adds the default supported types
-                // OPTIONAL but highly recommend
-                .AddDefaultMappers()
-                // select a theme, default is Light
-                .AddLightTheme()
-            );
-       await UseHostBuilder(e.Args);
-    }
-    private async Task UseHostBuilder(string[] args)
-    {
-        var hostBuilder = CreateHostBuilder(args);
-        var host =await hostBuilder.StartAsync();
-        ServiceProvideR = host.Services;
-        host.Services.GetService<MainWindow>()?.ShowDialog();
-        Current.Shutdown();
-    }
-    /// <summary>
-    /// 使用Host作为配置
-    /// </summary>
-    public static IHostBuilder CreateHostBuilder(string[] args)
-    {
-        var hostBuilder = Host.CreateDefaultBuilder(args).UseSerilog();
-        hostBuilder.ConfigureServices((ctx, services) => {
-            services.AddService();
-        });
-        return hostBuilder;
-    }
-
     /// <summary>
     /// 使用默认Ioc容器注册服务
     /// </summary>
+    [Obsolete("不在使用默认IOC容器配置",error:true)]
     private void DefaultStartUp()
     {
         //InitializeComponent();

@@ -10,7 +10,7 @@
         Closing="Window_Closing"
         d:DataContext="{d:DesignInstance Type=vm:ChartsViewModel}"
         
-        Title="ChartsWindow" Height="450" Width="800">
+        Title="ChartsWindow" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -18,14 +18,31 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Content="导出图表到图片"  Click="SaveBtn_Click"/>
-            <Button Content="导入Excel数据" Margin="20,0,0,0" Width="121" Command="{Binding ReadExcelCommand}"/>
-
+            <Button Content="{Binding LoadText}" Margin="20,0,0,0" Width="121" Command="{Binding ReadExcelCommand}"/>
+            <Button Content="TrainPip" Margin="20,0,0,0" Height="48" Width="66" Command="{Binding TrainPipVisibilityCommand}"/>
+            <Button Content="Linder" Margin="20,0,0,0" Height="48" Width="48" Command="{Binding LinderVisibilityCommand}"/>
+            <Button Content="AddLinder" Margin="20,0,0,0" Height="48" Width="60" Command="{Binding AddLinderVisibilityCommand}"/>
+            <Button Content="StopLinder" Margin="20,0,0,0" Height="48" Width="69" Command="{Binding StopLinderVisibilityCommand}"/>
         </StackPanel>
-        <lvc:CartesianChart x:Name="LineChart" ZoomMode="X" Grid.Row="1"
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding ChartViewWidth}"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <lvc:CartesianChart x:Name="LineChart" ZoomMode="X"
+                                MinHeight="500"
+                                MinWidth="1000"
+            TooltipPosition="Right"
             Series="{Binding SeriesCollection}"
-                            XAxes="{Binding XAxes}"
+            LegendTextPaint="{Binding LegendTextPaint}"
+            LegendPosition="Top"
+            TooltipTextPaint="{Binding LegendTextPaint}"
            >
-        </lvc:CartesianChart>
+            </lvc:CartesianChart>
+        </Grid>
+        
     </Grid>
     
 </Window>
