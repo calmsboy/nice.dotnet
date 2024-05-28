@@ -10,17 +10,10 @@ public static class NiceCoreServiceRegister
     public static IServiceCollection AddNiceClientService(this IServiceCollection services,string baseUrl="https://localhost:5188"
         ,HttpMessageHandler? messageHandler= null,string clientName = "DefaultHttpClient")
     {
-        var httpClient = messageHandler is null? new HttpClient():new HttpClient(messageHandler);
-
-        httpClient.BaseAddress = new Uri(baseUrl);
-
-        httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
-
-        //services.AddSingleton(spa=> httpClient);
-
         var httpClientBuilder = services.AddHttpClient(clientName, opt =>
         {
             opt.BaseAddress = new Uri(baseUrl);
+            opt.DefaultRequestHeaders.Connection.Add("keep-alive");
         });
         if(messageHandler is not null)
             httpClientBuilder.ConfigurePrimaryHttpMessageHandler(() => messageHandler);

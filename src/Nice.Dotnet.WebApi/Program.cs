@@ -30,7 +30,8 @@ namespace Nice.Dotnet.WebApi
             builder.Services.AddSignalR();
             builder.Services.AddDbContext<NiceDbContext>(opt =>
             {
-                opt.UseSqlite(@"Data Source=Nice.db");
+                opt.UseSqlite(@"Data Source=Nice.db")
+                .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddFilter((category, level) => false)));
             });
 
             builder.Services.AddScoped<ICustomInfoService, CustomInfoService>();

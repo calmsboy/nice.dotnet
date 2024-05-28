@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Protos\greet.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardware.Info" Version="11.1.1.1" />
+  </ItemGroup>
+ <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.22.4" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.53.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.54.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+ <ItemGroup>
+   <Reference Include="Newtonsoft.Json">
+     <HintPath>D:\.nuget\newtonsoft.json\13.0.3\lib\net6.0\Newtonsoft.Json.dll</HintPath>
+   </Reference>
+ </ItemGroup>
+ <ItemGroup>
+   <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
+ </ItemGroup>
+</Project>

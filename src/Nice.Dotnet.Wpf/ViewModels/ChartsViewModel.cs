@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Nice.Dotnet.Wpf.ViewModels;
 
@@ -25,15 +26,14 @@ public partial class ChartsViewModel: ObservableObject
     private int _key = 0;
     private int _delay = 100;
     private readonly Random _random = new Random();
-   
+    private bool _finish = false;
 
-    private readonly ObservableCollection<ObservablePoint> _observablePoints;
+    private readonly ObservableCollection<ObservablePoint>? _observablePoints;
     private readonly ObservableCollection<ObservablePoint> _observablePointsTrainPip;
     private readonly ObservableCollection<ObservablePoint> _observablePointsLinder;
     private readonly ObservableCollection<ObservablePoint> _observablePointsAddLinder;
     private readonly ObservableCollection<ObservablePoint> _observablePointsStopLinder;
 
-    private ObservablePoint _currentPoint = new ObservablePoint();
     private ConcurrentQueue<Test> _rowsQueue = new();
     private Action<Action> _onUIThread;
     private readonly Stopwatch _stopwatch = new Stopwatch();
@@ -68,19 +68,20 @@ public partial class ChartsViewModel: ObservableObject
 
         _stopwatch.Start();
         var rows = await MiniExcel.QueryAsync<Test>(fullName);
-        //rows = rows.Where(q => q.TrainPip <= 1000);
+        rows = rows.Where(q => q.TrainPip <= 1000);
+        //rows = rows.Take(10000);
         _rowsQueue = new ConcurrentQueue<Test>(rows);
         _stopwatch.Stop();
         Log.Information($"Excel加载[{rows.Count()}]条数据,共需时间: {_stopwatch.Elapsed}");
         _delay = 2;
-
+        _finish = false;
         ClearData();
         //ChartViewHidden();
         SeriesCollection.Clear();
 
         SettingCharts();
         _stopwatch.Start();
-        foreach (var item in Enumerable.Range(1,10))
+        foreach (var item in Enumerable.Range(1,6))
         {
             _ = Task.Run(()=>
             {
@@ -92,6 +93,26 @@ public partial class ChartsViewModel: ObservableObject
         
     }
     public Object Sync { get; } = new object();
+    /// <summary>
+    /// 用于解决ObservableCollection类型---该类型的 CollectionView，
+    /// 不支持从调度程序线程以外的线程对其 SourceCollection 进行的更改。
+    /// </summary>
+    /// <param name="action"></param>
+    void HandleDataToCollection(Action action)
+    {
+        _ = ThreadPool.QueueUserWorkItem(delegate
+        {
+            SynchronizationContext
+                .SetSynchronizationContext
+                (
+                    new DispatcherSynchronizationContext(Application.Current.Dispatcher)
+                );
+            SynchronizationContext.Current?.Post(PlacementMode =>
+            {
+                action.Invoke();
+            }, null);
+        });
+    }
     private async void AnalysisData()
     {
         await Task.Delay(_delay);
@@ -101,7 +122,7 @@ public partial class ChartsViewModel: ObservableObject
             while (_rowsQueue.TryDequeue(out Test? test))
             {
                 //ui线程版，不然使用默认多线程会出现IEnumerable内容被更改的情况
-                _onUIThread.Invoke(() =>
+                HandleDataToCollection(() =>
                 {
                     _observablePointsTrainPip.Add(new ObservablePoint(test.Id, test.TrainPip));
                     //if(_observablePointsTrainPip.Count()>66) _observablePointsTrainPip.RemoveAt(0);
@@ -109,6 +130,10 @@ public partial class ChartsViewModel: ObservableObject
                     _observablePointsAddLinder.Add(new ObservablePoint(test.Id, test.AddLinder));
                     _observablePointsStopLinder.Add(new ObservablePoint(test.Id, test.StopLinder));
                 });
+                //_onUIThread.Invoke(() =>
+                //{
+                    
+                //});
                 Thread.Sleep(2);
             }
         }
@@ -116,7 +141,12 @@ public partial class ChartsViewModel: ObservableObject
         _stopwatch.Stop();
         Log.Information($"LiveCharts加载数据,共需时间: {_stopwatch.Elapsed}");
         ChartViewShow();
-        MessageBox.Show("数据渲染完毕");
+        if (!_finish)
+        {
+            _finish=true;
+            MessageBox.Show("数据渲染完毕");
+        }
+       
     }
     void SettingCharts()
     {
@@ -133,7 +163,7 @@ public partial class ChartsViewModel: ObservableObject
             GeometryFill = null,
             GeometryStroke = null,
             LineSmoothness = 0,
-            Name = "列车管(kPa)",
+            Name = "lC",//列车管(kPa)
             Values = _observablePointsTrainPip,
             IsVisible = true,
         });
@@ -144,7 +174,7 @@ public partial class ChartsViewModel: ObservableObject
             GeometryFill = null,
             GeometryStroke = null,
             LineSmoothness = 0,
-            Name = "加缓缸(kPa)",
+            Name = "2号缸",//加缓缸(kPa)
             Values = _observablePointsAddLinder,
             IsVisible = true,
         });
@@ -155,7 +185,7 @@ public partial class ChartsViewModel: ObservableObject
             GeometryFill = null,
             GeometryStroke = null,
             LineSmoothness = 0,
-            Name = "副风缸(kPa)",
+            Name = "2号缸",//副风缸(kPa)
             Values = _observablePointsLinder,
             IsVisible = true,
         });
@@ -166,7 +196,7 @@ public partial class ChartsViewModel: ObservableObject
             GeometryFill = null,
             GeometryStroke = null,
             LineSmoothness = 0,
-            Name = "制动缸(kPa)",
+            Name = "4号缸",//制动缸(kPa)
             Values = _observablePointsStopLinder,
             IsVisible = true,
         });

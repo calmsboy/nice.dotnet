@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace ="Nice.Dotnet.gRPC.Protos";
+
+
+
+message HelloRequest{
+  string name =1;
+}
+
+message HelloReply{
+  string message=1;
+}
+
+// Nice服务
+service NiceService {
+ rpc SayHello (HelloRequest) returns (HelloReply);
+}

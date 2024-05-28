@@ -48,8 +48,33 @@
                  d:ItemsSource="{d:SampleData ItemCount=0}"
                  ItemsSource="{Binding MessageCollect}"
                  />
+        
         <Button Content="图表页面" HorizontalAlignment="Left" Height="33" Margin="400,115,0,0" VerticalAlignment="Top" Width="55" Click="ChartSwitch_Click" />
-
+        <DatePicker HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="33" Margin="300,115,0,0"/>
+        <Menu HorizontalAlignment="Left"  VerticalAlignment="Top"  Height="33" Margin="220,115,0,0" >
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+            <MenuItem Header="_Font">
+                <MenuItem Header="_Bold" IsCheckable="True"
+              Checked="Bold_Checked"
+              Unchecked="Bold_Unchecked"/>
+                <MenuItem Header="_Italic" IsCheckable="True"
+              Checked="Italic_Checked"
+              Unchecked="Italic_Unchecked"/>
+                <Separator/>
+                <MenuItem Header="I_ncrease Font Size"
+              Click="IncreaseFont_Click"/>
+                <MenuItem Header="_Decrease Font Size"
+              Click="DecreaseFont_Click"/>
+            </MenuItem>
+        </Menu>
+        <TextBox HorizontalAlignment="Left"  VerticalAlignment="Top" Width="100"  Height="33" Margin="120,115,0,0" Name="textBox1" TextWrapping="Wrap"
+         >
+            The quick brown fox jumps over the lazy dog.
+        </TextBox>
 
 
     </Grid>

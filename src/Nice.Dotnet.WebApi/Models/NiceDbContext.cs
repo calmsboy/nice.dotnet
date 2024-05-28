@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Nice.Dotnet.Domain.Entities;
 
 namespace Nice.Dotnet.WebApi.Models
@@ -10,6 +11,7 @@ namespace Nice.Dotnet.WebApi.Models
     {
         public NiceDbContext(DbContextOptions options) : base(options)
         {
+           
         }
 
         protected NiceDbContext()
@@ -21,6 +23,7 @@ namespace Nice.Dotnet.WebApi.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+            optionsBuilder.ConfigureWarnings(b => b.Ignore(CoreEventId.SaveChangesCompleted));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

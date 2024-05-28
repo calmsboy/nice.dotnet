@@ -14,7 +14,7 @@ namespace Nice.Dotnet.Maui.ViewModels
         {
             this.connectivity = connectivity;
             _chatConnectService = chatConnectService;
-            var hander = new HttpsClientHandlerService();
+            var hander = new HttpsClientHandlerFactory();
             _chatConnectService.BuildConnection("MAUI", hander.GetPlatformMessageHandler()).GetAwaiter();
             _chatConnectService.Watch((online) => { }, (user, msg) =>
             {

@@ -30,11 +30,9 @@ public partial class App : Application
     /// 静态服务提供商
     /// 主要用于不方便注入服务的情况
     /// </summary>
-    public static IServiceProvider ServiceProvideR;
+    public static IServiceProvider? ServiceProvideR;
     public App()
     {
-
-        
         if (!_initialized)
         {
             Log.Logger = SerilogIntegration.BuildSerilogInstance("Nice.Dotnet.Wpf");
@@ -45,8 +43,7 @@ public partial class App : Application
             #endregion
 
             _initialized =true;
-        }
-            
+        } 
     }
     
 
@@ -61,17 +58,19 @@ public partial class App : Application
             );
        await UseHostBuilder(e.Args);
     }
-    private async Task UseHostBuilder(string[] args)
+
+    private static async Task UseHostBuilder(string[] args)
     {
         var hostBuilder = CreateHostBuilder(args);
         var host =await hostBuilder.StartAsync();
         ServiceProvideR = host.Services;
+        //使用阻塞弹出窗口的方式
         host.Services.GetService<MainWindow>()?.ShowDialog();
+        //在关闭窗口时关闭程序
         Current.Shutdown();
     }
-    /// <summary>
-    /// 使用Host作为运行
-    /// </summary>
+
+
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
         var hostBuilder = Host.CreateDefaultBuilder(args).UseSerilog();
@@ -149,9 +148,8 @@ public partial class App : Application
         e.SetObserved();//设置该异常已察觉（这样处理后就不会引起程序崩溃）
     }
     #endregion
-    /// <summary>
-    /// 使用默认Ioc容器注册服务
-    /// </summary>
+   
+
     [Obsolete("不在使用默认IOC容器配置",error:true)]
     private void DefaultStartUp()
     {
